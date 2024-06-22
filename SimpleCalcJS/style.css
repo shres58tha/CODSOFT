@@ -17,6 +17,7 @@ html{
     left: 50%;
 
     transform: translate(-50%, -50%);
+    
 }
 
 .calc-container{
@@ -26,6 +27,8 @@ html{
     height: auto;
 
     border-radius: 10px 10px 30px 30px;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5); /* Right-side shadow */
+    transition: box-shadow 0.2s ease; 
 }
 
 .output{
