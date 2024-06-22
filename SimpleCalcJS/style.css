@@ -107,10 +107,11 @@ html{
 
     font-size: 1.5em;
 
-    border: 2px black solid;
-    
+    border: 2px rgb(213, 210, 210) solid;
+    border-radius: 10px;
     background-color: transparent;
-    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2); /* Right-side shadow */
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3); /* Right-side shadow */
+    transition: box-shadow 0.2s ease; 
     margin : 8px;
 
     cursor: pointer;
