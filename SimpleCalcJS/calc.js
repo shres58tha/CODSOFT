@@ -148,6 +148,10 @@ function calculator( button ){
             data.operation.pop();            
         }
     }else if( button.type == "operator" ){
+        if (lastButtonType == "operator"){
+            data.result.pop();
+            data.operation.pop();             
+        }
         data.operation.push(button.symbol);
         data.result.push(button.formula);
     }
@@ -164,6 +168,11 @@ function calculator( button ){
         
         // PUSH WHAT'S LEFT IN TEMP TO RESULT AND JOIN RESULT
         let result_joined = data.result.join('');
+
+        if (result_joined === ''){
+            updateOutputResult( 0 );
+            return;s
+        }
 
         // CLEAR ALL ARRAYS, NO NEED TO SAVE ANYTHING ANYMORE
         data.operation = [];
