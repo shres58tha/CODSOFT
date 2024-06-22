@@ -123,7 +123,7 @@ function createCalculatorButtons(){
         added_btns++;
     });
 }
-createCalculatorButtons();
+
 
 input_element.addEventListener("click", event => { 
     const target_btn = event.target;
@@ -134,16 +134,10 @@ input_element.addEventListener("click", event => {
     
 });
 
+let lastButtonType = "";
+
 function calculator( button ){
-    if( button.type == "operator" ){
-        data.operation.push(button.symbol);
-        data.result.push(button.formula);
-    }
-    else if( button.type == "number" ){
-        data.operation.push(button.symbol);
-        data.result.push(button.formula);
-    }
-    else if( button.type == "key" ){
+    if( button.type == "key" ){
         if( button.name == "clear" ){
             data.operation = [];
             data.result = [];
@@ -153,7 +147,19 @@ function calculator( button ){
             data.result.pop();
             data.operation.pop();            
         }
+    }else if( button.type == "operator" ){
+        data.operation.push(button.symbol);
+        data.result.push(button.formula);
     }
+    else if( button.type == "number" ){
+        if (lastButtonType == "calculate"){
+            data.operation = [];
+            data.result = [];
+            updateOutputResult(0);
+        }
+        data.operation.push(button.symbol);
+        data.result.push(button.formula);
+    } 
     else if( button.type == "calculate" ){
         
         // PUSH WHAT'S LEFT IN TEMP TO RESULT AND JOIN RESULT
@@ -185,10 +191,13 @@ function calculator( button ){
         // UPDATE OUTPUT
         updateOutputResult( result_final );
 
-        return;
+        //return;
     }
 
     updateOutputOperation( data.operation.join('') );
+
+    // Update lastButtonType
+    lastButtonType = button.type;
 }
 
 function updateOutputOperation(operation){
@@ -229,3 +238,7 @@ function formatResult( result ){
         return result;
     }
 }
+
+
+createCalculatorButtons();
+

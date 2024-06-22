@@ -25,7 +25,7 @@ html{
     width: 300px;
     height: auto;
 
-    border-radius: 0 0 30px 30px;
+    border-radius: 10px 10px 30px 30px;
 }
 
 .output{
@@ -34,7 +34,7 @@ html{
 
 .operation{
     width: 300px;
-    height: 70px;
+    height: 50px;
 
     color: #878787;
 
@@ -47,16 +47,19 @@ html{
 .operation .value{
     position: absolute;
 
-    bottom: 5px;
+    bottom: 0;
     right : 10px;
     
-    white-space: nowrap;
+    /* white-space: nowrap; */
     overflow: hidden;
 }
 
 .result{
     width: 300px;
-    height: 140px;
+    height: 60px;
+    margin: none;
+    padding: none;
+
 
     color: #FFF;
 
@@ -70,8 +73,8 @@ html{
 .result .value{
     position: absolute;
 
-    top: 50%;
-    transform: translateY(-50%);
+    top: 60%;
+    transform: translateY(-60%);
     right : 10px;
     
     white-space: nowrap;
@@ -93,14 +96,20 @@ html{
     align-items: center;
 }
 
+.button{
+    border:black;
+    border-radius: 5px;
+
+}
+
 .row button{
     width: 50px;
     height: 50px;
 
     font-size: 1.5em;
 
-    border: none;
-    border-radius: 50%;
+    border: black;
+    
     background-color: transparent;
 
     margin : 8px;
@@ -121,6 +130,7 @@ html{
 .row #delete{
     color: #FFF;
     background-color: #e05046;
+    border-radius: 50px;
 }
 
 #division, #multiplication, #subtraction, #addition {
