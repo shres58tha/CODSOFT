@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+	body {
+		margin: 0;
+		background: black;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		box-sizing: border-box;
+	}
+	button.clear {
+		background: #FF5722;
+		color: #fff;
+	}
+	table {
+		background: black;
+		padding: 2%;
+		border: 0.6vh solid grey;
+		text-align: center;
+		box-shadow: 1vh 1vh 2.7vh #0d5569;
+		border-radius: 1vh;
+		width: 100%;
+		max-width: 800px;
+	}
+	button.equal {
+		background: #210b04;
+	}
+	button.equal:hover {
+		background: #000803;
+	}
+	input[type="text"] {
+		width: 100%;
+		height: 10vh;
+		border: 0.1vh solid #000;
+		padding: 1vh 2%;
+		font-size: 2.9vh;
+		background: #000000;
+		font-weight: bold;
+		margin-bottom: 2.5vh;
+		font-family: cursive;
+		margin-top: 1vh;
+		color: #dedede;
+		border-bottom: 0.2vh solid #cc4014;
+		box-sizing: border-box;
+	}
+	button {
+		padding: 1vh 2%;
+		width: 8vh;
+		height: 5vh;
+		margin-bottom: 0vh;
+		font-size: 2.6vh;
+		font-weight: bold;
+		font-family: Arial, Helvetica, sans-serif;
+		background: #000803;
+		border: .02vh solid #0d5569;
+		box-shadow: .2vh .2vh .7vh #0d5569;
+		color: #d23200;
+		border-radius: 0.6vh;
+		cursor: pointer;
+		box-sizing: border-box;
+	}
+	button:active {
+		background: #210b04;
+		box-shadow: inset -0.2vh -0.2vh 0.5vh #0d5569;
+	}
+	button:hover {
+		background: #210b04;
+	}
+	button.selected {
+		background: #301934;
+		color: #fff;
+	}
+	td {
+		padding: 0.5vh;
+	}
+	</style>
+</head>
+
+<body>
+	<form name="calcul">
+	<table>
+		<tr>
+			<td colspan="4"> <input type="text" name="result" placeholder="0" style="text-align:right"> </td>
+		</tr>
+		<tr>
+			<td><button type="button" value="deg" id="degButton" onclick="setUnit('deg')"> deg </button> </td>
+			<td><button type="button" value="rad" id="radButton" onclick="setUnit('rad')"> rad </button> </td>
+			<td><button type="button" value="grad" id="gradButton" onclick="setUnit('grad')"> grad </button> </td>
+			<td colspan="2"><button type="button" value="C" class="clear" onclick="remove()"> C </button></td>
+		</tr>
+		<tr>
+			<td><button type="button" value="sin" onclick="sin()"> sin </button> </td>
+			<td><button type="button" value="cos" onclick="cos()"> cos</button> </td>
+			<td><button type="button" value="tan" onclick="tan()"> tan </button> </td>
+			<td><button type="button" value="BACKSPC" onclick="BACKSPC()">&#9003;</button> </td>
+		</tr>
+		<tr>
+			<td><button type="button" value="asin" onclick="asin()"> asin </button> </td>
+			<td><button type="button" value="acos" onclick="acos()"> acos</button> </td>
+			<td><button type="button" value="atan" onclick="atan()"> atan </button> </td>
+			<td><button type="button" value="%" onclick="operator(value)"> % </button> </td>
+		<tr>
+			<td><button type="button" value="x^2" onclick="square()"> x<sup>2 </button> </td>
+			<td><button type="button" value="x^3" onclick="cubed()"> x<sup>3 </button> </td>
+			<td><button type="button" value="sqrt2" onclick="sqrt2()"> &radic; </button> </td>
+			<td><button type="button" value="sqrt3" onclick="sqrt3()"> &#8731; </button> </td>
+		</tr>
+		<tr>
+			<td><button type="button" value="1" onclick="number(value)"> 1 </button> </td>
+			<td><button type="button" value="2" onclick="number(value)"> 2 </button> </td>
+			<td><button type="button" value="3" onclick="number(value)"> 3 </button> </td>
+			<td><button type="button" value="*" onclick="operator(value)"> * </button> </td>
+		</tr>
+		<tr>
+			<td><button type="button" value="4" onclick="number(value)"> 4</button> </td>
+			<td><button type="button" value="5" onclick="number(value)"> 5 </button> </td>
+			<td><button type="button" value="6" onclick="number(value)"> 6 </button> </td>
+			<td><button type="button" value="/" onclick="operator(value)"> / </button> </td>
+		</tr>
+		<tr>
+			<td><button type="button" value="7" onclick="number(value)"> 7 </button> </td>
+			<td><button type="button" value="8" onclick="number(value)"> 8 </button> </td>
+			<td><button type="button" value="9" onclick="number(value)"> 9 </button> </td>
+			<td><button type="button" value="-" onclick="operator(value)"> - </button> </td>
+		</tr>
+		<tr>
+			<td><button type="button" value="." onclick="number(value)"> . </button> </td>
+			<td><button type="button" value="0" onclick="number(value)"> 0 </button> </td>
+			<td> <button type="button" value="=" onclick="equal()" class="equal">=</button> </td>
+			<td><button type="button" value="+" onclick="operator(value)"> + </button> </td>
+		</tr>
+	</table>
+	</form>
+	<script>
+	let currentUnit = '';
+	lastFunctionCalledNumber = false;
+	function setUnit(unit) {
+		currentUnit = unit;
+		document.getElementById('degButton').classList.remove('selected');
+		document.getElementById('radButton').classList.remove('selected');
+		document.getElementById('gradButton').classList.remove('selected');
+		if (unit === 'deg') {
+			document.getElementById('degButton').classList.add('selected');
+		} else if (unit === 'rad') {
+			document.getElementById('radButton').classList.add('selected');
+		} else if (unit === 'grad') {
+			document.getElementById('gradButton').classList.add('selected');
+		}
+	}
+	if (!currentUnit) {
+		setUnit('deg');
+	}
+	function toRadians(value) {
+		if (currentUnit === 'deg') return value * (Math.PI / 180);
+		if (currentUnit === 'grad') return value * (Math.PI / 200);
+		return value;
+	}
+	function fromRadians(value) {
+		if (currentUnit === 'deg') return value * (180 / Math.PI);
+		if (currentUnit === 'grad') return value * (200 / Math.PI);
+		return value;
+	}
+	function sin() {
+		document.calcul.result.value = Math.sin(toRadians(parseFloat(document.calcul.result.value)));
+		lastFunctionCalledNumber = false;
+	}
+	function cos() {
+		document.calcul.result.value = Math.cos(toRadians(parseFloat(document.calcul.result.value)));
+		lastFunctionCalledNumber = false;
+	}
+	function tan() {
+		document.calcul.result.value = Math.tan(toRadians(parseFloat(document.calcul.result.value)));
+		lastFunctionCalledNumber = false;
+	}
+	function asin() {
+		document.calcul.result.value = fromRadians(Math.asin(parseFloat(document.calcul.result.value)));
+		lastFunctionCalledNumber = false;
+	}
+	function acos() {
+		document.calcul.result.value = fromRadians(Math.acos(parseFloat(document.calcul.result.value)));
+		lastFunctionCalledNumber = false;
+	}
+	function atan() {
+		document.calcul.result.value = fromRadians(Math.atan(parseFloat(document.calcul.result.value)));
+		lastFunctionCalledNumber = false;
+	}
+	function BACKSPC() {
+		if (lastFunctionCalledNumber) {
+			var a = document.calcul.result.value;
+			document.calcul.result.value = a.substr(0, a.length - 1);
+		} else {
+			document.calcul.result.value = 0;
+		}
+		lastFunctionCalledNumber = true;
+	}
+	function square() {
+		document.calcul.result.value = Math.pow(document.calcul.result.value, 2);
+		lastFunctionCalledNumber = false;
+	}
+	function cubed() {
+		document.calcul.result.value = Math.pow(document.calcul.result.value, 3);
+		lastFunctionCalledNumber = false;
+	}
+	function sqrt2() {
+		document.calcul.result.value = Math.pow(document.calcul.result.value, 1 / 2);
+		lastFunctionCalledNumber = false;
+	}
+	function sqrt3() {
+		document.calcul.result.value = Math.pow(document.calcul.result.value, 1 / 3);
+		lastFunctionCalledNumber = false;
+	}
+	function number(value) {
+		if (!lastFunctionCalledNumber) {
+			document.calcul.result.value = value;
+		} else {
+			document.calcul.result.value += value;
+		}
+		lastFunctionCalledNumber = true;
+	}	
+	function operator(value) {
+		if (document.calcul.result.value)
+			document.calcul.result.value += value;
+		lastFunctionCalledNumber = true;
+	}	
+    function remove(){
+        document.calcul.result.value = "";
+    }
+	function equal() {
+		try {
+			document.calcul.result.value = eval(document.calcul.result.value);
+		} catch (error) {
+			document.calcul.result.value=error.message;
+		}
+		lastFunctionCalledNumber = false;
+	}
+	</script>
+</body>
+</html>
