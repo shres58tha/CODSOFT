@@ -12,21 +12,16 @@ html{
 
 .calculator{
     position: absolute;
-
     top: 50%;
     left: 50%;
-
     transform: translate(-50%, -50%);
-    
 }
 
 .calc-container{
-    background-color: #1d1d1d;
-
+    background-color: #121111;
     width: 300px;
     height: auto;
-
-    border-radius: 10px 10px 30px 30px;
+     border-radius: 10px 10px 30px 30px;
     box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5); /* Right-side shadow */
     transition: box-shadow 0.2s ease; 
 }
@@ -38,22 +33,16 @@ html{
 .operation{
     width: 300px;
     height: 50px;
-
     color: #878787;
-
     font-size: 1.9em;
     font-weight: bold;
-
     position: relative;
     overflow: hidden;
 }
 .operation .value{
     position: absolute;
-
     bottom: 0;
     right : 10px;
-    
-    /* white-space: nowrap; */
     overflow: hidden;
 }
 
@@ -61,21 +50,17 @@ html{
     width: 300px;
     height: 60px;
     color: #FFF;
-
     font-size: 2.1em;
-    font-weight: bold;
-    
+    font-weight: bold; 
     overflow: hidden;
     position: relative;
 }
 
 .result .value{
     position: absolute;
-
     top: 60%;
     transform: translateY(-60%);
-    right : 10px;
-    
+    right : 10px;  
     white-space: nowrap;
     overflow: hidden;
 }
@@ -83,7 +68,6 @@ html{
 
 .input{
     background-color: #FFF;
-
     border-radius: 0 0 25px 25px;
     border: 1px solid #1d1d1d;
     height: 340px;
@@ -98,22 +82,18 @@ html{
 .button{
     border:black;
     border-radius: 5px;
-
 }
 
 .row button{
     width: 50px;
     height: 50px;
-
     font-size: 1.5em;
-
     border: 2px rgb(213, 210, 210) solid;
     border-radius: 10px;
     background-color: transparent;
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3); /* Right-side shadow */
     transition: box-shadow 0.2s ease; 
     margin : 8px;
-
     cursor: pointer;
 }
 
