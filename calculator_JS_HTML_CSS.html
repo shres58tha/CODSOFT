@@ -8,8 +8,14 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 99vh;
 			font-family: Arial, Helvetica, sans-serif;
+			max-width: 800px;
+			max-height:900px ; /* Set a maximum height */
+
+			min-width:  500px ;
+			min-height: 410px ;
+			padding-top: 9vh;
+
 		}
 		button.clear {
 			background: #FF5722;
@@ -23,7 +29,6 @@
 			box-shadow: 1vh 1vh 2.7vh #0d5569;
 			border-radius: 1vh;
 			width: 100%;
-			max-width: 800px;
 		}
 		button.equal {
 			background: #210b04;
@@ -66,19 +71,47 @@
 			background: #210b04;
 		}
 		button.selected {
-			background: #301934;
-			color: #fff;
-		}
-		input[type="radio"] {
-			transform: scale(.8);
-		}
-		label {
-			font-size: 1.8vh;
-			color: white;
-		}
-		/* td {
-			padding: .1vh; 
-		} */
+            background: #301934;
+            color: #fff;
+        }
+
+        .DRGcontainer {
+            border: none; /* Remove border */
+            width: 15vh; /* Occupy full width of parent td */
+            height: 5vh; /* Occupy full height of parent td */
+            display: flex;
+            justify-content:space-around; /* Center elements horizontally */
+            align-items: center; /* Center elements vertically */
+			box-shadow: none;
+			margin:0;
+			padding: 0;
+
+        }
+
+        .DRGcontainer td {
+            padding: 0; /* Remove padding from td */
+        }
+
+        input[type="radio"] {
+            width: 3vh; /* Set width of the radio button */
+            height: 3vh; /* Set height of the radio button */
+            transform: scale(.8); /* Optional: Adjust size with scale */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+			bottom : -1vh;
+			position: relative;
+
+        }
+        label {
+            font-size: 1.8vh;
+            color: white;
+            position: relative;
+            top: -2vh;
+            left: -2vh;
+        }
+        td {
+            padding: none; 
+        }
 	</style>
 </head>
 
@@ -90,9 +123,12 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="radio" name="unit" onclick="setUnit('deg')" checked><label>D</label>
-					<input type="radio" name="unit" onclick="setUnit('rad')"><label>R</label>
-					<input type="radio" name="unit" onclick="setUnit('grad')"><label>G</label>
+				<table class="DRGcontainer">
+				
+					<td><input type="radio" name="unit" onclick="setUnit('deg')" checked><label>D</label></td>
+					<td><input type="radio" name="unit" onclick="setUnit('rad')"><label>R</label></td>
+					<td><input type="radio" name="unit" onclick="setUnit('grad')"><label>G</label></td>
+				</table>
 				</td>
 				<td><button type="button" value="BACKSPC" onclick="BACKSPC()">&#9003;</button></td>
 				<td><button type="button" value="C" class="clear" onclick="remove()">C</button></td>
