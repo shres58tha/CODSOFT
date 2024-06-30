@@ -7,19 +7,75 @@
     <style>
         body {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
         }
-        iframe {
-            width: 50%;
+        .container, .full-frame-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
             height: 100%;
+        }
+        .two-column {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            width: 100%;
+        }
+        iframe {
+            width: 100%;
+            height: 90%;
             border: none;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            height: 10%;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <iframe src="SimpleCalcJS/index.html"></iframe>
-    <iframe src="calculator_JS_HTML_CSS.html"></iframe>
+    <div class="two-column container" id="twoColumnContainer">
+        <div class="container">
+            <div class="buttons">
+                <button onclick="openFullScreen('SimpleCalcJS/index.html')">Full Screen SimpleCalcJS</button>
+            </div>
+            <iframe id="leftFrame" src="SimpleCalcJS/index.html"></iframe>
+        </div>
+        <div class="container">
+            <div class="buttons">
+                <button onclick="openFullScreen('calculator_JS_HTML_CSS.html')">Full Screen Scientific Calculator</button>
+            </div>
+            <iframe id="rightFrame" src="calculator_JS_HTML_CSS.html"></iframe>
+        </div>
+    </div>
+    <div class="full-frame-container hidden" id="fullFrameContainer">
+        <button onclick="exitFullScreen()">Exit Full Screen</button>
+        <iframe id="fullFrame" src=""></iframe>
+    </div>
+
+    <script>
+        function openWebsite(frameId, url) {
+            document.getElementById(frameId).src = url;
+        }
+
+        function openFullScreen(url) {
+            document.getElementById('twoColumnContainer').classList.add('hidden');
+            document.getElementById('fullFrameContainer').classList.remove('hidden');
+            document.getElementById('fullFrame').src = url;
+        }
+
+        function exitFullScreen() {
+            document.getElementById('fullFrameContainer').classList.add('hidden');
+            document.getElementById('twoColumnContainer').classList.remove('hidden');
+            document.getElementById('fullFrame').src = '';
+        }
+    </script>
 </body>
 </html>
